@@ -41,7 +41,7 @@ export default function App() {
     const totalPages = data?.total_pages ?? 0;
     const maxTotalPages = Math.min(totalPages, 10);
 
-    const handlePageChange = async (newQuery: string) => {
+    const handleSearch = async (newQuery: string) => {
         setQuery(newQuery);
         setCurrentPage(1);
     }
@@ -49,12 +49,12 @@ export default function App() {
     return (
         <div className={css.app}>
             <Toaster position={"top-center"}/>
-            <SearchBar onSubmit={handlePageChange}/>
+            <SearchBar onSubmit={handleSearch}/>
             {isSuccess && maxTotalPages > 1 && (
                 <ReactPagination
                     pageCount={maxTotalPages}
-                    forcePage={currentPage}
-                    onPageChange={setCurrentPage}
+                    forcePage={currentPage - 1}
+                    onPageChange={(nextPage) => setCurrentPage(nextPage+1)}
                 />
             )}
             {isLoading && <Loader/>}
