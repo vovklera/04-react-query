@@ -9,7 +9,7 @@ import Loader from "../Loader/Loader.tsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 import MovieModal from "../MovieModal/MovieModal.tsx";
 import {keepPreviousData, useQuery} from "@tanstack/react-query";
-import Pagination from "../ReactPaginate/Pagination.tsx";
+import ReactPagination from "../ReactPaginate/Pagination.tsx";
 
 export default function App() {
     const [isSelectedMovie, setIsSelectedMovie] = useState<Movie | null>(null);
@@ -50,10 +50,10 @@ export default function App() {
         <div className={css.app}>
             <Toaster position={"top-center"}/>
             <SearchBar onSubmit={handlePageChange}/>
-            {isSuccess && totalPages > 1 && (
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={maxTotalPages}
+            {isSuccess && maxTotalPages > 1 && (
+                <ReactPagination
+                    pageCount={maxTotalPages}
+                    forcePage={currentPage}
                     onPageChange={setCurrentPage}
                 />
             )}
