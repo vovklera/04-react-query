@@ -52,15 +52,15 @@ export default function App() {
             <SearchBar onSubmit={handlePageChange}/>
             {isSuccess && totalPages > 1 && (
                 <Pagination
-                    page={currentPage}
+                    currentPage={currentPage}
                     totalPages={maxTotalPages}
-                    setPage={setCurrentPage}
+                    onPageChange={setCurrentPage}
                 />
             )}
-            <MovieGrid onSelect={openModal} movies={movies}/>
             {isLoading && <Loader/>}
             {isError && <ErrorMessage/>}
-            {isSelectedMovie && <MovieModal movie={isSelectedMovie} onClose={()=>setIsSelectedMovie(null)}/>}
+            {movies.length > 0 && (<MovieGrid onSelect={openModal} movies={movies}/>)}
+            {isSelectedMovie && (<MovieModal movie={isSelectedMovie} onClose={()=>setIsSelectedMovie(null)}/>)}
         </div>
     );
 }
