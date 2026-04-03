@@ -53,8 +53,8 @@ export default function App() {
             {isSuccess && maxTotalPages > 1 && (
                 <ReactPagination
                     pageCount={maxTotalPages}
-                    forcePage={currentPage - 1}
-                    onPageChange={(nextPage) => setCurrentPage(nextPage+1)}
+                    forcePage={currentPage}
+                    onPageChange={setCurrentPage}
                 />
             )}
             {isLoading && <Loader/>}
